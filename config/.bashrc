@@ -2,7 +2,7 @@
 [ -z "$PS1" ] && return
 
 alias ls='ls --color=auto'
-alias nautilus='nautilus --no-desktop'
+alias vino-server='/usr/lib/vino/vino-server'
 #PS1='[\u@\h \W]\$ '
 
 GIT_PS1_SHOWDIRTYSTATE=false
@@ -23,3 +23,5 @@ complete -cf sudo
 complete -cf man
 complete -cf killall
 complete -cf which
+
+fortune
