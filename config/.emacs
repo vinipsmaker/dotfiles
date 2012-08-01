@@ -3,6 +3,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auto-save-default nil)
+ '(column-number-mode t)
+ '(custom-enabled-themes (quote (tango-dark)))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
@@ -13,10 +16,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "bitstream" :slant normal :weight normal :height 90 :width normal)))))
-
-(setq auto-save-default nil)
-(set-scroll-bar-mode `right)
-(column-number-mode 1)
 
 ;; Turn on warn highlighting for characters outside of the 'width' char limit
 (defun font-lock-width-keyword (width)
