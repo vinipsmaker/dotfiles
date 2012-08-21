@@ -1,0 +1,16 @@
+#!/bin/bash
+
+rm tufao.tar.bz2
+
+cd ~/Projetos
+tar cjvf tufao.tar.bz2 --exclude-vcs tufao
+cd -
+mv ~/Projetos/tufao.tar.bz2 .
+
+if [ ! -f tufao.tar.bz2 ]; then
+    echo 'Failed to create tufao.tar.bz2'
+fi
+
+sed -i -r -e "s/^md5sums.*\$/$(makepkg -g 2>/dev/null)/g" ./PKGBUILD
+rm -rf pkg src
+makepkg -f
