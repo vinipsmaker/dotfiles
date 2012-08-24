@@ -3,6 +3,7 @@
 
 alias ls='ls --color=auto'
 alias vino-server='/usr/lib/vino/vino-server'
+alias youtube='youtube-dl -f 43 -t'
 #PS1='[\u@\h \W]\$ '
 
 . /usr/share/git/completion/git-completion.bash
