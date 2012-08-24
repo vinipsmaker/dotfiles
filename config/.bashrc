@@ -5,7 +5,8 @@ alias ls='ls --color=auto'
 alias vino-server='/usr/lib/vino/vino-server'
 #PS1='[\u@\h \W]\$ '
 
-. /etc/bash_completion.d/git
+. /usr/share/git/completion/git-completion.bash
+. /usr/share/git/completion/git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=false
 PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]$(__git_ps1) \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
 export BROWSER='firefox'
