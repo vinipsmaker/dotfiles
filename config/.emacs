@@ -53,8 +53,7 @@
 ;; yasnippet install stuff
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/yas")
 (require 'yasnippet) ;; not yasnippet-bundle
-(yas/initialize)
-(yas/load-directory "/usr/share/emacs/site-lisp/yas/snippets")
+(yas/global-mode 1) ;; or manually load it with yas-global-mode
 
 ;; auto-complete install stuff
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/auto-complete")
