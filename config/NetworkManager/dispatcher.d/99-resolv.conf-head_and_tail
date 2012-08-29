@@ -1,0 +1,5 @@
+#!/bin/bash
+
+resolvconf='/etc/resolv.conf'
+cat "$resolvconf"{.head,,.tail} 2>/dev/null > "$resolvconf".tmp
+mv -f "$resolvconf".tmp "$resolvconf"
