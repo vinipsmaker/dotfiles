@@ -27,4 +27,4 @@ complete -cf man
 complete -cf killall
 complete -cf which
 
-fortune
+fortune -c
