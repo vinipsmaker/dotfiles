@@ -6,14 +6,18 @@ if [ ! -e "${CHROOT_DIR}/proc/cpuinfo" ]; then
 
     # /dev/shm
     # required for chromium and other programs
-    mkdir "${CHROOT_DIR}/dev/shm"
+    if [ ! -e "${CHROOT_DIR}/dev/shm" ]; then
+        mkdir "${CHROOT_DIR}/dev/shm"
+    fi
     mount -t tmpfs none "${CHROOT_DIR}/dev/shm"
 
     # tty and pts
     # required for xterm and alike
     > "${CHROOT_DIR}/dev/ptmx"
     mount -o bind /dev/ptmx "${CHROOT_DIR}/dev/ptmx"
-    mkdir "${CHROOT_DIR}/dev/pts"
+    if [ ! -e "${CHROOT_DIR}/dev/pts" ]; then
+        mkdir "${CHROOT_DIR}/dev/pts"
+    fi
     mount -t devpts none "${CHROOT_DIR}/dev/pts"
 
     # /dev/{null,zero,random,urandom}
