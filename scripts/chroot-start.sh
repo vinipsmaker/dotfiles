@@ -2,7 +2,7 @@ CHROOT_DIR="$(dirname $0)"
 
 if [ ! -e "${CHROOT_DIR}/proc/cpuinfo" ]; then
     echo "Mounting..."
-    mount -o bind /proc "${CHROOT_DIR}/proc"
+    mount -t proc none "${CHROOT_DIR}/proc"
 
     # /dev/shm
     # required for chromium and other programs
@@ -26,7 +26,7 @@ if [ ! -e "${CHROOT_DIR}/proc/cpuinfo" ]; then
     > "${CHROOT_DIR}/dev/urandom"
     mount -o bind /dev/urandom "${CHROOT_DIR}/dev/urandom"
 
-    mount -o bind /sys "${CHROOT_DIR}/sys"
+    mount -t sysfs none "${CHROOT_DIR}/sys"
     mount -o nosuid,nodev -t tmpfs none "${CHROOT_DIR}/tmp"
 fi
 
