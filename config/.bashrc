@@ -27,4 +27,8 @@ complete -cf man
 complete -cf killall
 complete -cf which
 
-fortune -c
+if [[ -z $DISPLAY && $XDG_VTNR -le 3 ]]; then
+    exec startx
+else
+    fortune -c
+fi
