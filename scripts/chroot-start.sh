@@ -6,6 +6,9 @@ if [ ! -e "${CHROOT_DIR}/proc/cpuinfo" ]; then
 
     mount -t tmpfs -o nodev none "${CHROOT_DIR}/dev"
 
+    # /dev/fd
+    ln -s /proc/self/fd "${CHROOT_DIR}/dev/fd"
+
     # /dev/shm
     # required for chromium and other programs
     mkdir "${CHROOT_DIR}/dev/shm"
