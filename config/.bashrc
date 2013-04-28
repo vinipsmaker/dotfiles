@@ -5,7 +5,7 @@ alias ls='ls --color=auto'
 alias grep='grep -I'
 alias vino-server='/usr/lib/vino/vino-server'
 alias youtube='youtube-dl -f 43 -l'
-alias mplayer='mplayer -ao pulse'
+alias mplayer='mplayer -ao pulse --quvi-format=default'
 alias aplayer='mplayer -vo none'
 #PS1='[\u@\h \W]\$ '
 
