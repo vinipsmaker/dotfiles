@@ -2,7 +2,7 @@
 [ -z "$PS1" ] && return
 
 alias ls='ls --color=auto'
-alias grep='grep -I'
+alias grep='grep --color=auto -I'
 alias vino-server='/usr/lib/vino/vino-server'
 alias youtube='youtube-dl -f 43 -l'
 alias mplayer='mplayer -ao pulse --quvi-format=default'
