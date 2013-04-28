@@ -15,8 +15,7 @@ rescueme() {
 
 numlockx
 
-# exec gnome-session
-# exec startkde
-# exec startxfce4
-# ...or the Window Manager of your choice
+#exec gnome-session
+#exec startkde
+#exec startxfce4
 exec enlightenment_start
