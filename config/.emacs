@@ -114,3 +114,8 @@
   )
 
 (add-hook 'cmake-mode-hook (function cmake-rename-buffer))
+
+;; PKGBUILD stuff
+(setq auto-mode-alist
+      (append '(("/PKGBUILD$" . shell-script-mode))
+              auto-mode-alist))
