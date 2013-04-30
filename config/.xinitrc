@@ -13,6 +13,7 @@ rescueme() {
 }
 #rescueme &
 
+xset b off
 numlockx
 
 #exec gnome-session
