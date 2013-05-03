@@ -1,0 +1,8 @@
+[push]
+	default = simple
+[color]
+	ui = true
+[core]
+	editor = emacs -nw
+[alias]
+	log2 = log --graph --pretty=oneline
