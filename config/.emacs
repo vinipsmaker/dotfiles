@@ -10,6 +10,7 @@
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(make-backup-files nil)
+ '(safe-local-variable-values (quote ((c-file-offsets (innamespace . 0) (inline-open . 0) (case-label . +)))))
  '(visible-bell t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
