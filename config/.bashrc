@@ -32,7 +32,7 @@ complete -cf man
 complete -cf killall
 complete -cf which
 
-if [[ -z $DISPLAY && $XDG_VTNR -le 3 ]]; then
+if [[ -z $DISPLAY && $XDG_VTNR -le 3 && $(tty) == /dev/tty* ]]; then
     exec startx
 else
     fortune -c
