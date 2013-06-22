@@ -63,35 +63,28 @@
 (add-to-list 'ac-dictionary-directories "/usr/share/emacs/site-lisp/auto-complete/ac-dict")
 (ac-config-default)
 
-;; auto-complete-clang install stuff
-(require 'auto-complete-clang)
-(setq clang-completion-suppress-error 't)
-
 ;; auto-complete config stuff
 (setq ac-auto-start nil)
 (setq ac-expand-on-auto-complete nil)
 (setq ac-quick-help-delay 0.5)
 (define-key ac-mode-map [C-tab] 'auto-complete)
 
-;; auto-complete-clang config stuff
-(defun my-ac-cc-mode-setup ()
-  (setq ac-sources (append '(ac-source-clang) ac-sources)))
-(add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
+;;;; auto-complete-clang install stuff
+(require 'auto-complete-clang-async)
 
-(setq ac-clang-flags
-      (mapcar (lambda (item)(concat "-I" item))
-              (split-string
-               "
- /usr/include/c++/4.7.1
- /usr/include/c++/4.7.1/x86_64-unknown-linux-gnu
- /usr/include/c++/4.7.1/backward
- /usr/lib/gcc/x86_64-unknown-linux-gnu/4.7.1/include
- /usr/local/include
- /usr/lib/gcc/x86_64-unknown-linux-gnu/4.7.1/include-fixed
- /usr/include
-"
-               )))
-(setq ac-clang-flags (append '("-std=c++11") ac-clang-flags))
+;;;; auto-complete-clang config stuff
+(defun ac-cc-mode-setup ()
+  ;(setq ac-clang-complete-executable "~/.emacs.d/clang-complete")
+  (setq ac-sources '(ac-source-clang-async))
+  (ac-clang-launch-completion-process)
+)
+
+(defun my-ac-config ()
+  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
+  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+  (global-auto-complete-mode t))
+
+(my-ac-config)
 
 ;; CMake mode stuff
 (require 'cmake-mode)
