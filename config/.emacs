@@ -29,6 +29,19 @@
 (font-lock-add-keywords 'c-mode (font-lock-width-keyword 80))
 (font-lock-add-keywords 'c++-mode (font-lock-width-keyword 80))
 
+;; Format the title-bar to always include the buffer name
+(setq frame-title-format "emacs - %b")
+
+;; Scroll line by line
+(setq scroll-step 1)
+
+;; show matching parens:
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+
+;; treat .h files as c++ files
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
 ;; AUCTeX
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
