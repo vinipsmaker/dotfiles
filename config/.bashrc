@@ -14,7 +14,12 @@ alias aplayer='mplayer -vo none'
 . /usr/share/git/completion/git-completion.bash
 . /usr/share/git/completion/git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=false
-PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]$(__git_ps1) \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
+if [[ -z $SSH_TTY ]]; then
+    PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]$(__git_ps1) \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
+else
+    PS1='\[\e[0;32m\]\u @ \h\[\e[m\] \[\e[1;34m\]\w\[\e[m\]$(__git_ps1) \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
+fi
+
 export BROWSER='firefox'
 export EDITOR='nano'
 export PAGER='less'
