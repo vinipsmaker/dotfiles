@@ -1,4 +1,7 @@
-CHROOT_DIR="$(dirname $0)"
+#!/usr/bin/env bash
+
+#CHROOT_DIR="$(dirname $0)"
+CHROOT_DIR="$1"
 
 if [ -e "${CHROOT_DIR}/proc/cpuinfo" ]; then
     echo "Unmounting..."
