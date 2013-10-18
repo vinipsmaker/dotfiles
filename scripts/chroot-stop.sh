@@ -8,6 +8,10 @@ if [ -e "${CHROOT_DIR}/proc/cpuinfo" ]; then
     # required for chromium and other programs
     umount -l "${CHROOT_DIR}/dev/shm"
 
+    # /dev/dri
+    # required for libgl
+    umount -l "${CHROOT_DIR}/dev/dri"
+
     # tty and pts
     # required for xterm and alike
     umount -l "${CHROOT_DIR}/dev/ptmx"

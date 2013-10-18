@@ -14,6 +14,11 @@ if [ ! -e "${CHROOT_DIR}/proc/cpuinfo" ]; then
     mkdir "${CHROOT_DIR}/dev/shm"
     mount -t tmpfs -o nosuid,nodev none "${CHROOT_DIR}/dev/shm"
 
+    # /dev/dri
+    # required for libgl
+    mkdir "${CHROOT_DIR}/dev/dri"
+    mount -o bind /dev/dri "${CHROOT_DIR}/dev/dri"
+
     # tty and pts
     # required for xterm and alike
     > "${CHROOT_DIR}/dev/ptmx"
