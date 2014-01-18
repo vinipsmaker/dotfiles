@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 
-import os
+import subprocess as sub
+import re
 from gi.repository import Notify
 import time
 
-os.system("ponymix decrease 5%")
+output = sub.check_output(["ponymix", "decrease", "5%"])
+volume = re.search('\\d+', str(output)).group()
 
 Notify.init("PulseAudio")
-msg=Notify.Notification.new("Volume", "Volume decreased", "/usr/share/icons/gnome/scalable/devices/audio-speakers-symbolic.svg")
+msg = Notify.Notification.new("Volume decreased", volume + '%', "/usr/share/icons/gnome/scalable/devices/audio-speakers-symbolic.svg")
 msg.show()
 time.sleep(0.5)
 msg.close()
