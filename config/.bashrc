@@ -11,6 +11,15 @@ alias mplayer='mplayer -ao pulse --quvi-format=default'
 alias aplayer='mplayer -vo none'
 #PS1='[\u@\h \W]\$ '
 
+man(){
+  env man $* || $1 --help | less
+}
+
+if [ $TERMINOLOGY ]; then
+  alias ls2='tyls'
+  alias cat2='tycat'
+fi
+
 . /usr/share/git/completion/git-completion.bash
 . /usr/share/git/completion/git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=false
