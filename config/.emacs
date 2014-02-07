@@ -127,3 +127,9 @@
 (setq auto-mode-alist
       (append '(("/PKGBUILD$" . shell-script-mode))
               auto-mode-alist))
+
+;; LLVM stuff
+(setq load-path
+    (cons (expand-file-name "~/.emacs.d/llvm") load-path))
+(require 'llvm-mode)
+(require 'tablegen-mode)
