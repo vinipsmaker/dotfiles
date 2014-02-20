@@ -27,6 +27,7 @@ bindkey -e
 
 setopt TRANSIENT_RPROMPT
 setopt print_exit_value
+setopt COMPLETE_IN_WORD
 
 ## History control
 setopt HIST_IGNORE_DUPS
@@ -60,6 +61,12 @@ TRAPINT() {
 # }}}
 
 # Key bindings {{{
+
+## Native keys
+
+bindkey "^I" expand-or-complete-prefix
+
+## Extended keys
 
 autoload zkbd
 function zkbd_file() {
