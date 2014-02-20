@@ -26,6 +26,7 @@ bindkey -e
 # zshoptions {{{
 
 setopt TRANSIENT_RPROMPT
+setopt print_exit_value
 
 ## History control
 setopt HIST_IGNORE_DUPS
