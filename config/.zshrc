@@ -155,11 +155,11 @@ updatemyprompt() {
   fi
   # }}}
 
-  PROMPT='%n'
+  PROMPT='%{$fg[cyan]%}%n'
   if [[ ! -z $SSH_TTY ]]; then
     PROMPT="${PROMPT}"' @ %m'
   fi
-  PROMPT="${PROMPT}"' %{$fg[blue]%}%~ %{$reset_color%}'"${_PROMPT_CHAR}"' '
+  PROMPT="${PROMPT}"' %{$fg[magenta]%}%~ %{$reset_color%}'"${_PROMPT_CHAR}"' '
 }
 
 precmd() { updatemyprompt }
