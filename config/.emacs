@@ -5,7 +5,6 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-default nil)
  '(column-number-mode t)
- '(custom-enabled-themes (quote (tango-dark)))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
