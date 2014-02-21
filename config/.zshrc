@@ -34,6 +34,13 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_NO_STORE
 
+## "Wording behaviour"
+## see select-word-style to learn more
+
+## Remove / from WORDCHARS
+## ${WORDCHARS//[_-]} would remove _ and -
+WORDCHARS="${WORDCHARS//[\/]}"
+
 # }}}
 
 # Zsh normally leaves the stty intr setting alone and handles the INT
