@@ -23,6 +23,14 @@ unsetopt notify
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
+# Extra plugins {{{
+
+## Magic quoting in URLs to save me from typing quoted strings
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+
+# }}}
+
 # zshoptions {{{
 
 setopt TRANSIENT_RPROMPT
@@ -40,10 +48,6 @@ setopt HIST_NO_STORE
 ## Remove / and - from WORDCHARS
 ## ${WORDCHARS//[_-]} would remove _ and -
 WORDCHARS="${WORDCHARS//[-\/]}"
-
-## Magic quoting in URLs to save me from typing quoted strings
-autoload -U url-quote-magic
-zle -N self-insert url-quote-magic
 
 # }}}
 
