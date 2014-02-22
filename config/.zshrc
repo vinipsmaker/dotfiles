@@ -75,27 +75,54 @@ bindkey "^I" expand-or-complete-prefix
 
 ## Extended keys
 
-autoload zkbd
-function zkbd_file() {
-    [[ -f ~/.zkbd/${TERM}-${VENDOR}-${OSTYPE} ]] && printf '%s' ~/".zkbd/${TERM}-${VENDOR}-${OSTYPE}" && return 0
-    [[ -f ~/.zkbd/${TERM}-${DISPLAY}          ]] && printf '%s' ~/".zkbd/${TERM}-${DISPLAY}"          && return 0
-    return 1
-}
+typeset -A key
 
-[[ ! -d ~/.zkbd ]] && mkdir ~/.zkbd
-keyfile=$(zkbd_file)
-ret=$?
-if [[ ${ret} -ne 0 ]]; then
-    zkbd
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+    ### If application mode/terminfo is available
+    function zle-line-init () {
+        echoti smkx
+    }
+    function zle-line-finish () {
+        echoti rmkx
+    }
+    zle -N zle-line-init
+    zle -N zle-line-finish
+
+    ### List of desired keys
+    key[Home]=${terminfo[khome]}
+    key[End]=${terminfo[kend]}
+    key[Delete]=${terminfo[kdch1]}
+    key[PageUp]=${terminfo[kpp]}
+    key[PageDown]=${terminfo[knp]}
+else
+    ### Fallback to manually managed user-driven database
+    printf 'Failed to setup keys using terminfo (application mode unsuported).\n'
+    printf 'Jumping to zkbd fallback.\n'
+
+    autoload zkbd
+    function zkbd_file() {
+        [[ -f ~/.zkbd/${TERM}-${VENDOR}-${OSTYPE} ]] && printf '%s' ~/".zkbd/${TERM}-${VENDOR}-${OSTYPE}" && return 0
+        [[ -f ~/.zkbd/${TERM}-${DISPLAY}          ]] && printf '%s' ~/".zkbd/${TERM}-${DISPLAY}"          && return 0
+        return 1
+    }
+
+    [[ ! -d ~/.zkbd ]] && mkdir ~/.zkbd
     keyfile=$(zkbd_file)
     ret=$?
+    if [[ ${ret} -ne 0 ]]; then
+        zkbd
+        keyfile=$(zkbd_file)
+        ret=$?
+    fi
+    if [[ ${ret} -eq 0 ]] ; then
+        source "${keyfile}"
+    else
+        printf 'Failed to setup keys using zkbd.\n'
+    fi
+    unfunction zkbd_file; unset keyfile ret
 fi
-if [[ ${ret} -eq 0 ]] ; then
-    source "${keyfile}"
-else
-    printf 'Failed to setup keys using zkbd.\n'
-fi
-unfunction zkbd_file; unset keyfile ret
+
+### Setup keys accordingly
 
 [[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
 [[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
