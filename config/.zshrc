@@ -37,9 +37,9 @@ setopt HIST_NO_STORE
 ## "Wording behaviour"
 ## see select-word-style to learn more
 
-## Remove / from WORDCHARS
+## Remove / and - from WORDCHARS
 ## ${WORDCHARS//[_-]} would remove _ and -
-WORDCHARS="${WORDCHARS//[\/]}"
+WORDCHARS="${WORDCHARS//[-\/]}"
 
 # }}}
 
