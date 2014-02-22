@@ -41,6 +41,10 @@ setopt HIST_NO_STORE
 ## ${WORDCHARS//[_-]} would remove _ and -
 WORDCHARS="${WORDCHARS//[-\/]}"
 
+## Magic quoting in URLs to save me from typing quoted strings
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+
 # }}}
 
 # Zsh normally leaves the stty intr setting alone and handles the INT
