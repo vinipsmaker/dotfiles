@@ -75,7 +75,14 @@ TRAPINT() {
 
 ## Native keys
 
+### Tab
 bindkey "^I" expand-or-complete-prefix
+
+### Alt + F
+bindkey "^[f" emacs-forward-word
+
+### Ctrl + U
+bindkey "^U" backward-kill-line
 
 ## Extended keys
 
