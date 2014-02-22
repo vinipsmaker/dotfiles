@@ -30,13 +30,13 @@ autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
 ## Fish shell like syntax highlighting
-local _zsh_syntax_highlighting_file=/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+function () {
+    local _syntax_highlighting_file=/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-if [ -f $_zsh_syntax_highlighting_file ]; then
-    . $_zsh_syntax_highlighting_file
-fi
-
-unset _zsh_syntax_highlighting_file
+    if [ -f $_syntax_highlighting_file ]; then
+        . $_syntax_highlighting_file
+    fi
+}
 
 # }}}
 
@@ -99,60 +99,62 @@ bindkey "^U" backward-kill-line
 
 ## Extended keys
 
-typeset -A key
+function () {
+    typeset -A key
 
-if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
-    ### If application mode/terminfo is available
-    function zle-line-init () {
-        echoti smkx
-    }
-    function zle-line-finish () {
-        echoti rmkx
-    }
-    zle -N zle-line-init
-    zle -N zle-line-finish
+    if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+        ### If application mode/terminfo is available
+        function zle-line-init () {
+            echoti smkx
+        }
+        function zle-line-finish () {
+            echoti rmkx
+        }
+        zle -N zle-line-init
+        zle -N zle-line-finish
 
-    ### List of desired keys
-    key[Home]=${terminfo[khome]}
-    key[End]=${terminfo[kend]}
-    key[Delete]=${terminfo[kdch1]}
-    key[PageUp]=${terminfo[kpp]}
-    key[PageDown]=${terminfo[knp]}
-else
-    ### Fallback to manually managed user-driven database
-    printf 'Failed to setup keys using terminfo (application mode unsuported).\n'
-    printf 'Jumping to zkbd fallback.\n'
+        ### List of desired keys
+        key[Home]=${terminfo[khome]}
+        key[End]=${terminfo[kend]}
+        key[Delete]=${terminfo[kdch1]}
+        key[PageUp]=${terminfo[kpp]}
+        key[PageDown]=${terminfo[knp]}
+    else
+        ### Fallback to manually managed user-driven database
+        printf 'Failed to setup keys using terminfo (application mode unsuported).\n'
+        printf 'Jumping to zkbd fallback.\n'
 
-    autoload zkbd
-    function zkbd_file() {
-        [[ -f ~/.zkbd/${TERM}-${VENDOR}-${OSTYPE} ]] && printf '%s' ~/".zkbd/${TERM}-${VENDOR}-${OSTYPE}" && return 0
-        [[ -f ~/.zkbd/${TERM}-${DISPLAY}          ]] && printf '%s' ~/".zkbd/${TERM}-${DISPLAY}"          && return 0
-        return 1
-    }
+        autoload zkbd
+        function zkbd_file() {
+            [[ -f ~/.zkbd/${TERM}-${VENDOR}-${OSTYPE} ]] && printf '%s' ~/".zkbd/${TERM}-${VENDOR}-${OSTYPE}" && return 0
+            [[ -f ~/.zkbd/${TERM}-${DISPLAY}          ]] && printf '%s' ~/".zkbd/${TERM}-${DISPLAY}"          && return 0
+            return 1
+        }
 
-    [[ ! -d ~/.zkbd ]] && mkdir ~/.zkbd
-    keyfile=$(zkbd_file)
-    ret=$?
-    if [[ ${ret} -ne 0 ]]; then
-        zkbd
+        [[ ! -d ~/.zkbd ]] && mkdir ~/.zkbd
         keyfile=$(zkbd_file)
         ret=$?
+        if [[ ${ret} -ne 0 ]]; then
+            zkbd
+            keyfile=$(zkbd_file)
+            ret=$?
+        fi
+        if [[ ${ret} -eq 0 ]] ; then
+            source "${keyfile}"
+        else
+            printf 'Failed to setup keys using zkbd.\n'
+        fi
+        unfunction zkbd_file; unset keyfile ret
     fi
-    if [[ ${ret} -eq 0 ]] ; then
-        source "${keyfile}"
-    else
-        printf 'Failed to setup keys using zkbd.\n'
-    fi
-    unfunction zkbd_file; unset keyfile ret
-fi
 
-### Setup keys accordingly
+    ### Setup keys accordingly
 
-[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
-[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
-[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
-[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" beginning-of-buffer-or-history
-[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" end-of-buffer-or-history
+    [[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
+    [[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
+    [[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
+    [[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" beginning-of-buffer-or-history
+    [[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" end-of-buffer-or-history
+}
 
 # }}}
 
