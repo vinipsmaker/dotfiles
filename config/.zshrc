@@ -29,6 +29,15 @@ bindkey -e
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
+## Fish shell like syntax highlighting
+local _zsh_syntax_highlighting_file=/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+if [ -f $_zsh_syntax_highlighting_file ]; then
+    . $_zsh_syntax_highlighting_file
+fi
+
+unset _zsh_syntax_highlighting_file
+
 # }}}
 
 # zshoptions {{{
