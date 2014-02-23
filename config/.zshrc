@@ -50,6 +50,7 @@ function () {
 setopt TRANSIENT_RPROMPT
 setopt print_exit_value
 setopt COMPLETE_IN_WORD
+setopt INTERACTIVE_COMMENTS
 
 ## History control
 setopt HIST_IGNORE_DUPS
