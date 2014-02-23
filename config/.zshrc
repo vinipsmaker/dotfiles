@@ -15,9 +15,6 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=4096
-SAVEHIST=4096
 setopt appendhistory extendedglob
 unsetopt notify
 bindkey -e
@@ -59,16 +56,6 @@ setopt INTERACTIVE_COMMENTS
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_NO_STORE
-
-## "Wording behaviour"
-## see select-word-style to learn more
-
-## Remove / and - from WORDCHARS
-## ${WORDCHARS//[_-]} would remove _ and -
-WORDCHARS="${WORDCHARS//[-\/]}"
-
-## See REDIRECTIONS WITH NO COMMAND on zshmisc
-NULLCMD=':'
 
 # }}}
 
