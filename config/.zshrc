@@ -63,6 +63,9 @@ setopt HIST_NO_STORE
 ## ${WORDCHARS//[_-]} would remove _ and -
 WORDCHARS="${WORDCHARS//[-\/]}"
 
+## See REDIRECTIONS WITH NO COMMAND on zshmisc
+NULLCMD=':'
+
 # }}}
 
 # Zsh normally leaves the stty intr setting alone and handles the INT
