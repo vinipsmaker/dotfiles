@@ -163,7 +163,7 @@ alias ls='ls --color=auto'
 alias cgrep='grep --color=always -I'
 alias grep='grep --color=auto -I'
 alias less='less -Ri'
-alias youtube='youtube-dl -f 43 -l'
+alias youtube='youtube-dl -f 43'
 alias mplayer='mplayer -ao pulse --quvi-format=default'
 alias aplayer='mplayer -vo none'
 
