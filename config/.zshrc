@@ -25,6 +25,11 @@ bindkey -e
 
 # Extra plugins {{{
 
+## Smarter help and a bash-like help function
+unalias run-help
+autoload run-help
+alias help='run-help'
+
 ## Magic quoting in URLs to save me from typing quoted strings
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
