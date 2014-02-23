@@ -30,6 +30,9 @@ unalias run-help
 autoload run-help
 alias help='run-help'
 
+## autocompletion for vlc based on --help
+compdef _gnu_generic vlc
+
 ## Magic quoting in URLs to save me from typing quoted strings
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
