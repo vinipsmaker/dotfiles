@@ -101,6 +101,9 @@ bindkey "^U" backward-kill-line
 function () {
     typeset -A key
 
+    ### Shift+Tab isn't available in the zkbd map
+    key[Shift+Tab]="^[	"
+
     if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
         ### If application mode/terminfo is available
         function zle-line-init () {
@@ -118,6 +121,8 @@ function () {
         key[Delete]=${terminfo[kdch1]}
         key[PageUp]=${terminfo[kpp]}
         key[PageDown]=${terminfo[knp]}
+
+        key[Shift+Tab]=${terminfo[kcbt]}
     else
         ### Fallback to manually managed user-driven database
         printf 'Failed to setup keys using terminfo (application mode unsuported).\n'
@@ -153,6 +158,10 @@ function () {
     [[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
     [[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" beginning-of-buffer-or-history
     [[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" end-of-buffer-or-history
+
+    ### Shift+Tab on completion list
+    zmodload zsh/complist
+    bindkey -M menuselect "${key[Shift+Tab]}" reverse-menu-complete
 }
 
 # }}}
