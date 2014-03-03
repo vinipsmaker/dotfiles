@@ -186,7 +186,7 @@ fi
 
 # Functions {{{
 
-man(){
+man() {
   env man $* || (command -v $1 >/dev/null 2>&1 && $1 --help | less)
 }
 
