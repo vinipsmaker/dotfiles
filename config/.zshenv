@@ -21,7 +21,7 @@ export SDL_SOUNDFONTS=/usr/share/soundfonts/fluidr3/FluidR3GM.SF2
 #
 # Remove / and - from WORDCHARS
 # ${WORDCHARS//[_-]} would remove _ and -
-WORDCHARS="${WORDCHARS//[-\/]}"
+WORDCHARS="${WORDCHARS//[-\/=.]}"
 
 # See REDIRECTIONS WITH NO COMMAND on zshmisc
 NULLCMD=':'
