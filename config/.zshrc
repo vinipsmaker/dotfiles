@@ -175,6 +175,7 @@ alias less='less -Ri'
 alias youtube='youtube-dl -f 43'
 alias mplayer='mplayer -ao pulse --quvi-format=default'
 alias aplayer='mplayer -vo none'
+alias insult='wget http://www.randominsults.net -O - 2>/dev/null | grep \<strong\> | sed "s;^.*<i>\(.*\)</i>.*$;\1;"'
 
 if [ $TERMINOLOGY ]; then
   alias ls2='tyls'
