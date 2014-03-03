@@ -190,6 +190,10 @@ man(){
   env man $* || (command -v $1 >/dev/null 2>&1 && $1 --help | less)
 }
 
+mdless() {
+  markdown $1 | lynx -stdin
+}
+
 # }}}
 
 # Prompt {{{
