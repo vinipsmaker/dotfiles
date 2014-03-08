@@ -168,6 +168,7 @@ function () {
 
 # Aliases {{{
 
+alias nc='ncat'
 alias ls='ls --color=auto'
 alias cgrep='grep --color=always -I'
 alias grep='grep --color=auto -I'
