@@ -59,6 +59,13 @@ setopt HIST_NO_STORE
 
 # }}}
 
+# Call rehash after any pacman/yaourt operation. A behaviour more accurate could
+# be achieved through `zstyle ':completion:*' rehash true`. {{{
+
+TRAPUSR1() { rehash }
+
+# }}}
+
 # Zsh normally leaves the stty intr setting alone and handles the INT
 # signal.  Which means that when you type ^C, you're sending a signal
 # to the tty process group, not a normal keystroke to the shell input.
@@ -237,7 +244,14 @@ updatemyprompt() {
   PROMPT="${PROMPT}"' %{$fg[magenta]%}%~ %{$reset_color%}'"${_PROMPT_CHAR}"' '
 }
 
-precmd() { updatemyprompt }
+precmd() {
+  # Update the prompt
+  updatemyprompt
+
+  # Call rehash after any pacman/yaourt operation
+  [[ $history[$[ HISTCMD -1 ]] == *(pacman|yaourt)* ]] && killall -USR1 zsh
+}
+
 preexec() { _trapped='no' }
 
 RPROMPT='%{$fg[yellow]%}${vcs_info_msg_0_}%{$reset_color%}'
