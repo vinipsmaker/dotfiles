@@ -11,6 +11,8 @@ export EDITOR='nano'
 export PAGER='less'
 export VISUAL='emacs'
 
+export GCC_COLORS=auto
+
 export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 export JAVA_FONTS=/usr/share/fonts/TTF
 
