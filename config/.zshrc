@@ -64,6 +64,12 @@ setopt HIST_NO_STORE
 
 TRAPUSR1() { rehash }
 
+rehash_precmd() {
+  [[ $history[$[ HISTCMD -1 ]] == *(pacman|yaourt)* ]] && killall -USR1 zsh
+}
+
+add-zsh-hook precmd rehash_precmd
+
 # }}}
 
 # Zsh normally leaves the stty intr setting alone and handles the INT
@@ -211,8 +217,6 @@ autoload -U colors && colors
 
 setopt prompt_subst
 
-fortune -c
-
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' enable git
@@ -244,16 +248,16 @@ updatemyprompt() {
   PROMPT="${PROMPT}"' %{$fg[magenta]%}%~ %{$reset_color%}'"${_PROMPT_CHAR}"' '
 }
 
-precmd() {
-  # Update the prompt
-  updatemyprompt
+add-zsh-hook precmd updatemyprompt
 
-  # Call rehash after any pacman/yaourt operation
-  [[ $history[$[ HISTCMD -1 ]] == *(pacman|yaourt)* ]] && killall -USR1 zsh
+function () {
+  # Functions are NOT really local, but I keep this style anyway
+  updatemyprompt_preexec() { _trapped='no' }
+  add-zsh-hook preexec updatemyprompt_preexec
 }
 
-preexec() { _trapped='no' }
-
 RPROMPT='%{$fg[yellow]%}${vcs_info_msg_0_}%{$reset_color%}'
+
+fortune -c
 
 # }}}
