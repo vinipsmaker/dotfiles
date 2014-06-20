@@ -151,3 +151,13 @@
 
 
 (put 'set-goal-column 'disabled nil)
+
+;; Fuc*ing C++ mode keeps identing namespace members
+;(defconst my-cc-style
+;  '("cc-mode"
+;    (c-offsets-alist . ((innamespace . [0])))))
+;
+;(c-add-style "my-cc-mode" my-cc-style)
+(defun my-c-setup ()
+  (c-set-offset 'innamespace [0]))
+(add-hook 'c++-mode-hook 'my-c-setup)
