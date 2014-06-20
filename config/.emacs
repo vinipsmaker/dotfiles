@@ -7,10 +7,12 @@
  '(column-number-mode t)
  '(fill-column 80)
  '(indent-tabs-mode nil)
+ '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(make-backup-files nil)
  '(safe-local-variable-values (quote ((c-file-offsets (innamespace . 0) (inline-open . 0) (case-label . +)))))
+ '(show-trailing-whitespace t)
  '(visible-bell t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
