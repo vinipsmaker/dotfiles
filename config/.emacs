@@ -161,3 +161,8 @@
 (defun my-c-setup ()
   (c-set-offset 'innamespace [0]))
 (add-hook 'c++-mode-hook 'my-c-setup)
+
+;; Quickly switching between header and implementation
+(add-hook 'c-mode-common-hook
+  (lambda()
+    (local-set-key  (kbd "C-c t") 'ff-find-other-file)))
