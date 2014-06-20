@@ -205,6 +205,10 @@ man() {
   env man $* || (command -v $1 >/dev/null 2>&1 && $1 --help | less)
 }
 
+mkcd() {
+  mkdir -p "$@" && cd "$_"
+}
+
 mdless() {
   markdown $1 | lynx -stdin
 }
