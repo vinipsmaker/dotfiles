@@ -209,6 +209,18 @@ mdless() {
   markdown $1 | lynx -stdin
 }
 
+myspeak() {
+  local _PORT="PulseAudio JACK Source"
+  xargs -I {} -- bash -c \
+    "espeak --stdout \"{}\" | mpv -ao jack:port=\"$_PORT\" -"
+}
+
+meuspeak() {
+  local _PORT="PulseAudio JACK Source"
+  xargs -I {} -- bash -c \
+    "espeak -v pt-br --stdout \"{}\" | mpv -ao jack:port=\"$_PORT\" -"
+}
+
 # }}}
 
 # Prompt {{{
