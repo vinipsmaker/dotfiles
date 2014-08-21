@@ -166,3 +166,9 @@
 (add-hook 'c-mode-common-hook
   (lambda()
     (local-set-key  (kbd "C-c t") 'ff-find-other-file)))
+
+;; Spray - an open spritz implementation
+(setq load-path
+    (cons (expand-file-name "~/.emacs.d/spray") load-path))
+(require 'spray)
+(global-set-key (kbd "<f6>") 'spray-mode)
