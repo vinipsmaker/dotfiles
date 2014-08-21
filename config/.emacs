@@ -29,14 +29,10 @@
  '(markdown-header-face-6 ((t (:inherit markdown-header-face :underline t))) t))
 
 ;; Turn on warn highlighting for characters outside of the 'width' char limit
-(defun font-lock-width-keyword (width)
-  "Return a font-lock style keyword for a string beyond width WIDTH
-   that uses 'font-lock-warning-face'."
-  `((,(format "^%s\\(.+\\)" (make-string width ?.))
-     (1 font-lock-warning-face t))))
-
-(font-lock-add-keywords 'c-mode (font-lock-width-keyword 80))
-(font-lock-add-keywords 'c++-mode (font-lock-width-keyword 80))
+(require 'whitespace)
+(setq whitespace-line-column 80) ;; limit line length
+(setq whitespace-style '(face lines-tail))
+(global-whitespace-mode +1)
 
 ;; Format the title-bar to always include the buffer name
 (setq frame-title-format "emacs - %b")
