@@ -249,11 +249,12 @@ updatemyprompt() {
 
   # Last command status {{{
   local _PROMPT_CHAR=""
+  local _DOLLAR='%(!.#.$)'
 
   if [ x"$_trapped" = x"yes" ]; then
-    _PROMPT_CHAR='$'
+    _PROMPT_CHAR="${_DOLLAR}"
   else
-    _PROMPT_CHAR="%(?::%{$bg[red]%})\$%{$reset_color%}"
+    _PROMPT_CHAR="%(?::%{$bg[red]%})${_DOLLAR}%{$reset_color%}"
   fi
   # }}}
 
