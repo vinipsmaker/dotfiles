@@ -258,7 +258,7 @@ updatemyprompt() {
   fi
   # }}}
 
-  PROMPT='%{$fg[cyan]%}%n'
+  PROMPT='%{$fg[cyan]%}%(!:%{$bg[red]%}:)%n%(!:%{%k%}:)'
   if [[ ! -z $SSH_TTY ]]; then
     PROMPT="${PROMPT}"' @ %m'
   fi
