@@ -4,7 +4,7 @@ HISTSIZE=4096
 SAVEHIST=4096
 # End of lines configured by zsh-newuser-install
 
-export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/Sistema/bin"
 
 export BROWSER='firefox'
 export EDITOR='nano'
@@ -12,6 +12,8 @@ export PAGER='less'
 export VISUAL='emacs'
 
 export GCC_COLORS=auto
+
+export GTK_THEME='Numix Solarized'
 
 export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 export JAVA_FONTS=/usr/share/fonts/TTF
@@ -24,7 +26,7 @@ export RPG2K3_RTP_PATH=~/Jogos/RTP/2003
 #
 # Remove / and - from WORDCHARS
 # ${WORDCHARS//[_-]} would remove _ and -
-WORDCHARS="${WORDCHARS//[-\/=.]}"
+WORDCHARS="${WORDCHARS//[-\/=._]}"
 
 # See REDIRECTIONS WITH NO COMMAND on zshmisc
 NULLCMD=':'
