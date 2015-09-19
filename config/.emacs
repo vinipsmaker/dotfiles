@@ -5,14 +5,22 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-default nil)
  '(column-number-mode t)
- '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+ '(custom-safe-themes
+   (quote
+    ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+ '(electric-indent-mode nil)
  '(fill-column 80)
  '(indent-tabs-mode nil)
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(make-backup-files nil)
- '(safe-local-variable-values (quote ((c-file-offsets (innamespace . 0) (inline-open . 0) (case-label . +)))))
+ '(safe-local-variable-values
+   (quote
+    ((c-file-offsets
+      (innamespace . 0)
+      (inline-open . 0)
+      (case-label . +)))))
  '(show-trailing-whitespace t)
  '(visible-bell t))
 (custom-set-faces
@@ -21,13 +29,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "bitstream" :slant normal :weight normal :height 90 :width normal))))
- '(markdown-header-delimiter-face ((t (:inherit font-lock-function-name-face :underline t :weight bold))) t)
- '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 1.5))) t)
- '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.3))) t)
- '(markdown-header-face-3 ((t (:inherit markdown-header-face :underline t :height 1.2))) t)
- '(markdown-header-face-4 ((t (:inherit markdown-header-face :underline t :height 1.1))) t)
- '(markdown-header-face-5 ((t (:inherit markdown-header-face :underline t))) t)
- '(markdown-header-face-6 ((t (:inherit markdown-header-face :underline t))) t))
+ '(markdown-header-delimiter-face ((t (:inherit font-lock-function-name-face :underline t :weight bold))))
+ '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 1.5))))
+ '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.3))))
+ '(markdown-header-face-3 ((t (:inherit markdown-header-face :underline t :height 1.2))))
+ '(markdown-header-face-4 ((t (:inherit markdown-header-face :underline t :height 1.1))))
+ '(markdown-header-face-5 ((t (:inherit markdown-header-face :underline t))))
+ '(markdown-header-face-6 ((t (:inherit markdown-header-face :underline t)))))
 
 ;; Solarized
 (add-to-list 'custom-theme-load-path "/usr/share/emacs/etc/themes")
@@ -48,6 +56,14 @@
 ;; show matching parens:
 (show-paren-mode 1)
 (setq show-paren-delay 0)
+
+;; from http://stackoverflow.com/questions/13575554/display-line-of-matching-bracket-in-the-minibuffer/13576646#13576646
+(defadvice show-paren-function (after my-echo-paren-matching-line activate)
+  "If a matching paren is off-screen, echo the matching line."
+  (when (char-equal (char-syntax (char-before (point))) ?\))
+    (let ((matching-text (blink-matching-open)))
+      (when matching-text
+        (message matching-text)))))
 
 ;; treat .h files as c++ files
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
@@ -173,3 +189,7 @@
     (cons (expand-file-name "~/.emacs.d/spray") load-path))
 (require 'spray)
 (global-set-key (kbd "<f6>") 'spray-mode)
+
+;; Rust mode
+(autoload 'rust-mode "rust-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
