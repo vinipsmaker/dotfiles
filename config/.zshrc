@@ -22,6 +22,8 @@ bindkey -e
 
 # Extra plugins {{{
 
+autoload -U add-zsh-hook
+
 ## Smarter help and a bash-like help function
 unalias run-help
 autoload run-help
