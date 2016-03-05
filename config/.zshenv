@@ -13,7 +13,8 @@ export VISUAL='emacs'
 
 export GCC_COLORS=auto
 
-export GTK_THEME='Numix Solarized'
+export GTK_THEME='Adwaita'
+export GTK_OVERLAY_SCROLLING=0
 
 export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 export JAVA_FONTS=/usr/share/fonts/TTF
@@ -30,3 +31,5 @@ WORDCHARS="${WORDCHARS//[-\/=._]}"
 
 # See REDIRECTIONS WITH NO COMMAND on zshmisc
 NULLCMD=':'
+
+export RUST_BACKTRACE=1
