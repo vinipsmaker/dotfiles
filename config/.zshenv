@@ -4,8 +4,6 @@ HISTSIZE=4096
 SAVEHIST=4096
 # End of lines configured by zsh-newuser-install
 
-export PATH="$PATH:$HOME/Sistema/bin"
-
 export BROWSER='firefox'
 export EDITOR='nano'
 export PAGER='less'
