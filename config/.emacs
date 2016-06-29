@@ -22,6 +22,7 @@
       (innamespace . 0)
       (inline-open . 0)
       (case-label . +)))))
+ '(shift-select-mode nil)
  '(show-paren-mode t)
  '(show-trailing-whitespace t)
  '(tool-bar-mode nil)
