@@ -190,7 +190,7 @@ alias grep='grep --color=auto -I'
 alias less='less -Ri'
 alias youtube='youtube-dl -f 43/18'
 alias mplayer='mplayer -ao pulse'
-alias aplayer='mplayer -vo none'
+alias aplayer='mplayer -vo null'
 alias insult='wget http://www.randominsults.net -O - 2>/dev/null | grep \<strong\> | sed "s;^.*<i>\(.*\)</i>.*$;\1;"'
 alias spacman='sudo pacman'
 
