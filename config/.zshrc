@@ -34,7 +34,9 @@ compdef _gnu_generic vlc
 
 ## Magic quoting in URLs to save me from typing quoted strings
 autoload -U url-quote-magic
+autoload -Uz bracketed-paste-magic
 zle -N self-insert url-quote-magic
+zle -N bracketed-paste bracketed-paste-magic
 
 ## Fish shell like syntax highlighting
 function () {
