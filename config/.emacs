@@ -5,9 +5,10 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-default nil)
  '(column-number-mode t)
+ '(custom-enabled-themes (quote (sanityinc-solarized-light)))
  '(custom-safe-themes
    (quote
-    ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+    ("4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
  '(display-time-mode nil)
  '(electric-indent-mode nil)
  '(fill-column 80)
@@ -16,6 +17,9 @@
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(make-backup-files nil)
+ '(package-selected-packages
+   (quote
+    (cmake-mode color-theme-sanityinc-solarized rust-mode markdown-mode auctex lua-mode adoc-mode git-gutter company)))
  '(safe-local-variable-values
    (quote
     ((c-file-offsets
@@ -32,7 +36,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "bitstream" :slant normal :weight normal :height 90 :width normal))))
+ '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 90 :width normal :foundry "bitstream" :family "Source Code Pro"))))
  '(markdown-header-delimiter-face ((t (:inherit font-lock-function-name-face :underline t :weight bold))))
  '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 1.5))))
  '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.3))))
@@ -40,10 +44,6 @@
  '(markdown-header-face-4 ((t (:inherit markdown-header-face :underline t :height 1.1))))
  '(markdown-header-face-5 ((t (:inherit markdown-header-face :underline t))))
  '(markdown-header-face-6 ((t (:inherit markdown-header-face :underline t)))))
-
-;; Solarized
-(add-to-list 'custom-theme-load-path "/usr/share/emacs/etc/themes")
-(load-theme 'solarized-dark t)
 
 ;; Turn on warn highlighting for characters outside of the 'width' char limit
 (require 'whitespace)
@@ -77,9 +77,9 @@
 ;; treat .h files as c++ files
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-;; AUCTeX
-(load "auctex.el" nil t t)
-(load "preview-latex.el" nil t t)
+;; treat .{ipp,inc} as c++ files
+(add-to-list 'auto-mode-alist '("\\.ipp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.inc\\'" . c++-mode))
 
 ;; ECoding style
 ;; http://trac.enlightenment.org/e/wiki/ECoding/Emacs
@@ -100,42 +100,7 @@
 ;; user style (using Qt coding conventions)
 (setq c-basic-offset 4)
 
-;; yasnippet install stuff
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/yas")
-(require 'yasnippet) ;; not yasnippet-bundle
-(yas/global-mode 1) ;; or manually load it with yas-global-mode
-
-;; auto-complete install stuff
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/auto-complete")
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "/usr/share/emacs/site-lisp/auto-complete/ac-dict")
-(ac-config-default)
-
-;; auto-complete config stuff
-(setq ac-auto-start nil)
-(setq ac-expand-on-auto-complete nil)
-(setq ac-quick-help-delay 0.5)
-(define-key ac-mode-map [C-tab] 'auto-complete)
-
-;;;; auto-complete-clang install stuff
-(require 'auto-complete-clang-async)
-
-;;;; auto-complete-clang config stuff
-(defun ac-cc-mode-setup ()
-  ;(setq ac-clang-complete-executable "~/.emacs.d/clang-complete")
-  (setq ac-sources '(ac-source-clang-async))
-  (ac-clang-launch-completion-process)
-)
-
-(defun my-ac-config ()
-  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
-  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-  (global-auto-complete-mode t))
-
-(my-ac-config)
-
 ;; CMake mode stuff
-(require 'cmake-mode)
 (setq auto-mode-alist
       (append '(("CMakeLists\\.txt\\'" . cmake-mode)
                 ("\\.cmake\\'" . cmake-mode))
@@ -202,3 +167,23 @@
 ;; Rust mode
 (autoload 'rust-mode "rust-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+
+;(require 'rust-mode)
+;(define-key rust-mode-map [C-tab] #'racer-complete-or-indent)
+;-;(require 'company)
+;-;(add-hook 'after-init-hook 'global-company-mode)
+;-;(require 'racer)
+;-;(add-hook 'rust-mode-hook #'racer-activate)
+
+;; MELPA - If you cannot fight the enemy, join the enemy
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;(add-to-list 'package-archives
+;             '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
+
+;; asciidoc stuff
+(setq auto-mode-alist
+      (append '(("\\.adoc$" . adoc-mode))
+              auto-mode-alist))
