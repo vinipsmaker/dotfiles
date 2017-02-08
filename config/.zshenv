@@ -9,6 +9,16 @@ export EDITOR='nano'
 export PAGER='less'
 export VISUAL='emacs'
 
+export XKB_DEFAULT_LAYOUT='br'
+export XKB_DEFAULT_VARIANT='abnt2'
+
+#export GDK_BACKEND=wayland
+#export QT_QPA_PLATFORM=wayland-egl
+#export CLUTTER_BACKEND=wayland
+#export SDL_VIDEODRIVER=wayland
+#export ELM_DISPLAY=wl
+#export ELM_ACCEL=none
+
 export GCC_COLORS=auto
 
 export GTK_THEME='Adwaita'
