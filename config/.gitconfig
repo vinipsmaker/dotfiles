@@ -3,6 +3,11 @@
 [color]
 	ui = true
 [core]
-	editor = emacs -nw
+	editor = LANG=en_US.utf8 emacs -nw
 [alias]
-	log2 = log --graph --pretty=oneline
+	log2 = log --graph --pretty=oneline --decorate
+	co = checkout
+[help]
+	autocorrect = 1
+[diff]
+	compactionHeuristic = true
