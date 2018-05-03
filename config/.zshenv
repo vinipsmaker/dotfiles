@@ -9,8 +9,8 @@ export EDITOR='nano'
 export PAGER='less'
 export VISUAL='emacs'
 
-export XKB_DEFAULT_LAYOUT='br'
-export XKB_DEFAULT_VARIANT='abnt2'
+export XKB_DEFAULT_LAYOUT='colemak'
+#export XKB_DEFAULT_VARIANT='abnt2'
 
 #export GDK_BACKEND=wayland
 #export QT_QPA_PLATFORM=wayland-egl

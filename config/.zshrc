@@ -44,6 +44,7 @@ function () {
 
     if [ -f $_syntax_highlighting_file ]; then
         . $_syntax_highlighting_file
+        ZSH_HIGHLIGHT_STYLES[comment]='none'
     fi
 }
 
@@ -63,13 +64,13 @@ setopt HIST_NO_STORE
 
 # }}}
 
-# Call rehash after any pacman/yaourt operation. A behaviour more accurate could
+# Call rehash after any pacman/yay operation. A behaviour more accurate could
 # be achieved through `zstyle ':completion:*' rehash true`. {{{
 
 TRAPUSR1() { rehash }
 
 rehash_precmd() {
-  [[ $history[$[ HISTCMD -1 ]] == *(pacman|yaourt)* ]] && killall -USR1 zsh
+  [[ $history[$[ HISTCMD -1 ]] == *(pacman|yay)* ]] && killall -USR1 zsh
 }
 
 add-zsh-hook precmd rehash_precmd
@@ -112,6 +113,14 @@ bindkey "^[f" emacs-forward-word
 
 ### Ctrl + U
 bindkey "^U" backward-kill-line
+
+### Ctrl + W
+
+bindkey "^w" kill-region
+
+### Ctrl + G
+
+bindkey "^g" deactivate-region
 
 ## Extended keys
 
@@ -195,6 +204,7 @@ alias mplayer='mplayer -ao pulse'
 alias aplayer='mplayer -vo null'
 alias insult='wget http://www.randominsults.net -O - 2>/dev/null | grep \<strong\> | sed "s;^.*<i>\(.*\)</i>.*$;\1;"'
 alias spacman='sudo pacman'
+alias teamocil='teamocil --here'
 
 if [ $TERMINOLOGY ]; then
   alias ls2='tyls'
@@ -204,10 +214,6 @@ fi
 # }}}
 
 # Functions {{{
-
-man() {
-  env man $* || (command -v $1 >/dev/null 2>&1 && $1 --help | less)
-}
 
 mkcd() {
   mkdir -p "$@" && cd "$_"
