@@ -8,9 +8,8 @@
  '(custom-enabled-themes (quote (sanityinc-solarized-light)))
  '(custom-safe-themes
    (quote
-    ("4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+    ("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
  '(display-time-mode nil)
- '(electric-indent-mode nil)
  '(fill-column 80)
  '(indent-tabs-mode nil)
  '(indicate-empty-lines t)
@@ -19,7 +18,7 @@
  '(make-backup-files nil)
  '(package-selected-packages
    (quote
-    (cmake-mode color-theme-sanityinc-solarized rust-mode markdown-mode auctex lua-mode adoc-mode git-gutter company)))
+    (fold-this editorconfig cmake-mode color-theme-sanityinc-solarized rust-mode markdown-mode auctex lua-mode adoc-mode git-gutter company)))
  '(safe-local-variable-values
    (quote
     ((c-file-offsets
@@ -187,3 +186,9 @@
 (setq auto-mode-alist
       (append '(("\\.adoc$" . adoc-mode))
               auto-mode-alist))
+
+;; EditoConfig stuff
+
+(require 'editorconfig)
+(editorconfig-mode 1)
+(put 'narrow-to-region 'disabled nil)
