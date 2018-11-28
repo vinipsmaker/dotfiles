@@ -25,7 +25,7 @@ bindkey -e
 autoload -U add-zsh-hook
 
 ## Smarter help and a bash-like help function
-unalias run-help
+unalias run-help 2>/dev/null
 autoload run-help
 alias help='run-help'
 
