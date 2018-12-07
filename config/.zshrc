@@ -203,7 +203,6 @@ alias youtube='youtube-dl -f 43/18'
 alias aplayer='mpv -vo null'
 alias insult='wget http://www.randominsults.net -O - 2>/dev/null | grep \<strong\> | sed "s;^.*<i>\(.*\)</i>.*$;\1;"'
 alias spacman='sudo pacman'
-alias teamocil='teamocil --here'
 
 if [ $TERMINOLOGY ]; then
   alias ls2='tyls'
